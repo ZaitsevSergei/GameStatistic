@@ -1,0 +1,110 @@
+﻿<Window x:Class="_2017.Gomoku.FirstTeam.GameStatistics.Zaitsev.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="301">
+    <Window.Resources>
+        <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Center"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="stkpnl" TargetType="StackPanel">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Orientation" Value="Horizontal"/>            
+        </Style>
+        <Style x:Key="TeamNamesStyle" TargetType="TextBox">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="Width" Value="70" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style x:Key="DataGridStyle" TargetType="DataGrid">
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="Height" Value="auto"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>            
+        </Grid.RowDefinitions>
+        <!--номер партии-->
+        <StackPanel Grid.Row="0" Style="{StaticResource stkpnl}">
+            <Label Content="Партия №"/>
+            <Label Name="GameNumber" Content="5"/>
+        </StackPanel>
+        <!--размер поля-->
+        <StackPanel  Grid.Row="1" Style="{StaticResource stkpnl}">
+            <Label Content="Поле:"/>
+            <Label Name="BoardSizes" Content="15х15"/>
+        </StackPanel>
+        <!--Длина выигрышной комбинации-->
+        <StackPanel Grid.Row="2" Style="{StaticResource stkpnl}">
+            <Label Content="Длина выигрышной комбинации:"/>
+            <Label Name="VictoryLine" Content="5"/>
+        </StackPanel>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!--первый игрок-->
+            <StackPanel Style="{StaticResource stkpnl}">
+                <Label Name="Player1_Image"  Content="X" BorderBrush="Black" BorderThickness="1"/>
+                <TextBox Name="Player1_Name" Text="First Team" TextAlignment="Center" Style="{StaticResource TeamNamesStyle}"/>
+                <Label Name="Player1_Points" Content="4" BorderBrush="Black" BorderThickness="1"/>
+            </StackPanel>
+
+            <!--второй игрок-->
+            <StackPanel Grid.Column="1" Style="{StaticResource stkpnl}">
+                <Label Name="Player2_Points" Content="0" BorderBrush="Black" BorderThickness="1"/>
+                <TextBox Name="Player2_Name" Text="Second Team" Style="{StaticResource TeamNamesStyle}"/>
+                <Label Name="Player2_Image" Content="O" BorderBrush="Black" BorderThickness="1"/>
+            </StackPanel>
+            
+            <!--таблица первого игрока-->
+            <DataGrid Name="Player1_Table" Grid.Row="1" Style="{StaticResource DataGridStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ход №" Binding="{Binding MoveID}"
+                                        Width="35" HeaderStyle="{StaticResource HeaderStyle}"/>
+                    <DataGridTextColumn Header="Время хода" Binding="{Binding MoveTime}"
+                                        Width="45" HeaderStyle="{StaticResource HeaderStyle}"/>
+                    <DataGridTextColumn Header="Общее время" Binding="{Binding WholeTime}"
+                                        Width="50" HeaderStyle="{StaticResource HeaderStyle}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--таблица второго игрока-->
+            <DataGrid Name="Player2_Table" Grid.Row="1" Grid.Column="1" Style="{StaticResource DataGridStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ход №" Binding="{Binding MoveID}"
+                                        Width="35" HeaderStyle="{StaticResource HeaderStyle}"/>
+                    <DataGridTextColumn Header="Время хода" Binding="{Binding MoveTime}"
+                                        Width="45" HeaderStyle="{StaticResource HeaderStyle}"/>
+                    <DataGridTextColumn Header="Общее время" Binding="{Binding WholeTime}"
+                                        Width="50" HeaderStyle="{StaticResource HeaderStyle}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+        </Grid>
+        
+    </Grid>
+</Window>
